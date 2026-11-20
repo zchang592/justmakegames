@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f0e5">
+    <title>海风茶档</title>
+    <script type="module" crossorigin src="./assets/index-D2yIjnb6.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CwTMDHGw.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="masthead">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <h1>海风茶档</h1>
+        </div>
+        <div class="controls">
+          <dl class="scoreboard" aria-label="本班统计">
+            <div><dt>营业剩余</dt><dd id="clock">01:15</dd></div>
+            <div><dt>已上菜</dt><dd id="served">0</dd></div>
+            <div><dt>收入</dt><dd id="earnings">¥0</dd></div>
+          </dl>
+          <button class="pause" type="button" id="pause" disabled>
+            <span class="pause-symbol" aria-hidden="true"></span>
+            <span id="pause-label">暂停</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="workbench">
+        <section class="stage" aria-labelledby="room-title">
+          <header class="section-heading">
+            <h2 id="room-title">餐区</h2>
+            <span class="shift-label" id="shift-label">准备开档</span>
+          </header>
+          <div class="room">
+            <div class="wall" aria-hidden="true">
+              <div class="harbor-window"></div>
+            </div>
+            <div class="floor" aria-hidden="true"></div>
+            <span class="plant plant-left" aria-hidden="true"></span>
+            <span class="plant plant-right" aria-hidden="true"></span>
+            <div id="room-controls" inert>
+              <section class="queue" aria-labelledby="queue-title">
+                <div class="queue-heading">
+                  <h3 id="queue-title">等位</h3>
+                  <span id="queue-count">0 / 3</span>
+                </div>
+                <div class="queue-slots" id="queue-slots"></div>
+              </section>
+              <div id="tables"></div>
+            </div>
+            <div class="waiter" id="waiter" data-spot="home" aria-hidden="true">
+              <span class="person" data-look="staff"><span class="coat"></span><span class="face"></span></span>
+              <span class="waiter-name">你</span>
+              <span class="held-icon" id="held-icon" hidden></span>
+            </div>
+
+            <section class="overlay" id="overlay" aria-labelledby="overlay-title">
+              <div class="opening-card">
+                <h2 id="overlay-title">今天开档</h2>
+                <p id="overlay-description">营业 75 秒，打烊后送完剩余订单。</p>
+                <ol class="steps" id="steps">
+                  <li><b>安排入座</b><span>点等位客人，再点一张空桌</span></li>
+                  <li><b>接单备餐</b><span>点桌子接单，再到料理台制作</span></li>
+                  <li><b>送餐上桌</b><span>取餐后，点对应的桌子上菜</span></li>
+                </ol>
+                <div class="opening-actions">
+                  <button class="primary" type="button" id="play">开门营业</button>
+                  <button class="secondary" type="button" id="restart" hidden>重新开档</button>
+                </div>
+              </div>
+            </section>
+          </div>
+          <footer class="guide">
+            <p id="hint" role="status">开始营业后，第一位客人会来到等位区。</p>
+            <span class="left-count">等不及离开 <b id="left">0</b></span>
+          </footer>
+        </section>
+
+        <section class="kitchen" aria-labelledby="kitchen-title">
+          <header class="section-heading"><h2 id="kitchen-title">料理台</h2></header>
+          <div id="kitchen-controls" inert>
+            <div class="stations" id="stations"></div>
+          </div>
+          <div class="tray" id="tray">
+            <span class="tray-icon" id="tray-icon" aria-hidden="true"></span>
+            <div><strong>托盘</strong><p id="tray-label">空托盘</p></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <template id="queue-template">
+      <button class="queue-guest" type="button" aria-pressed="false" hidden>
+        <span class="person" aria-hidden="true"><span class="coat"></span><span class="face"></span></span>
+        <span class="guest-status">
+          <span class="queue-name"></span>
+          <progress class="patience" aria-label="等位耐心"></progress>
+        </span>
+      </button>
+    </template>
+
+    <template id="table-template">
+      <button class="table" type="button" data-phase="empty">
+        <span class="chair" aria-hidden="true"></span>
+        <span class="person" aria-hidden="true" hidden><span class="coat"></span><span class="face"></span></span>
+        <span class="tabletop" aria-hidden="true"><span class="linen"></span><span class="setting"></span></span>
+        <span class="bubble" hidden>
+          <span class="order-icon" aria-hidden="true"></span>
+          <span class="order-copy"><span class="order-name"></span><span class="table-phase"></span></span>
+        </span>
+        <span class="table-name"></span>
+        <progress class="patience" aria-label="桌边耐心" hidden></progress>
+      </button>
+    </template>
+
+    <template id="station-template">
+      <button class="station" type="button" data-mode="idle">
+        <span class="dish-icon" aria-hidden="true"></span>
+        <span class="station-copy">
+          <strong class="dish-name"></strong>
+          <span class="station-meta"></span>
+        </span>
+        <span class="meter" aria-hidden="true" hidden></span>
+      </button>
+    </template>
+
+  </body>
+</html>
